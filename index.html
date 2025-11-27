@@ -1,56 +1,173 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
-    <title>Dashboard Simulasi Arus DC | IoT Display</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Simulasi Arus DC | Tugas IoT</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    
     <style>
-        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f4f7f6; }
-        .dashboard-header { text-align: center; padding: 10px; background-color: #3f51b5; color: white; border-radius: 8px; margin-bottom: 20px;}
-        .data-widgets { display: flex; justify-content: space-around; flex-wrap: wrap; margin-bottom: 30px; }
-        .widget { background: white; padding: 15px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); text-align: center; width: 45%; min-width: 300px; margin-bottom: 20px;}
-        .widget h2 { color: #3f51b5; margin-top: 0; }
-        .iframe-container { width: 100%; border: none; }
+        /* CSS Dasar */
+        body { 
+            font-family: 'Roboto', sans-serif; 
+            margin: 0; 
+            padding: 0; 
+            background-color: #f4f7f6; /* Latar belakang cerah */
+            color: #333;
+        }
+        
+        /* Header Dashboard */
+        .dashboard-header { 
+            text-align: center; 
+            padding: 20px 0; 
+            background-color: #1a237e; /* Warna biru gelap */
+            color: white; 
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .dashboard-header h1 {
+            margin: 0;
+            font-weight: 700;
+        }
+        .dashboard-header p {
+            margin: 5px 0 0;
+            font-size: 1.1em;
+        }
+
+        /* Kontainer Utama */
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 15px;
+        }
+
+        /* Area Widget (Meter dan Display) */
+        .data-widgets { 
+            display: flex; 
+            flex-wrap: wrap; /* Agar responsif di layar kecil */
+            gap: 20px;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+        
+        .widget { 
+            background: white; 
+            padding: 15px; 
+            border-radius: 12px; 
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08); 
+            text-align: center; 
+            flex: 1 1 calc(50% - 10px); /* 2 kolom di layar besar */
+            min-width: 300px; /* Minimal lebar di layar kecil */
+        }
+        .widget h2 { 
+            color: #3f51b5; 
+            margin-top: 5px; 
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 10px;
+        }
+        
+        /* Display Numerik */
+        .value-display {
+            padding: 15px;
+            background-color: #e8eaf6; /* Latar belakang ringan */
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+        .value-display .value { 
+            font-size: 4em; 
+            font-weight: 700; 
+            color: #ff9800; /* Warna aksen oranye */
+            line-height: 1.1;
+        }
+        .value-display .unit { 
+            font-size: 1.4em; 
+            color: #555; 
+            margin-top: -10px;
+        }
+        .status-normal {
+            color: #4CAF50; /* Hijau */
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        /* Area Grafik */
+        .graph-area {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+            margin-bottom: 30px;
+        }
+
+        /* iFrame untuk Plotly */
+        .iframe-container { 
+            width: 100%; 
+            border: none; 
+        }
+
+        /* Media Queries untuk Responsif */
+        @media (max-width: 768px) {
+            .data-widgets {
+                flex-direction: column;
+            }
+            .widget {
+                flex-basis: 100%;
+            }
+        }
     </style>
 </head>
 <body>
 
     <header class="dashboard-header">
-        <h1>Simulasi Pemantauan Arus DC</h1>
-        <p>Visualisasi IoT menggunakan Google Colab & GitHub Pages</p>
+        <h1>Dashboard Pemantauan Arus DC</h1>
+        <p>Visualisasi IoT Tugas Akhir | Kelompok [Nama Kelompok Anda]</p>
     </header>
 
-    <h2>Visualisasi Real-Time (Menggunakan Plotly Gauge)</h2>
-    
-    <div class="data-widgets">
-        <div class="widget">
-            <h2>Meter Arus (A)</h2>
+    <div class="container">
+        
+        <div class="data-widgets">
+            
+            <div class="widget">
+                <h2>Indikator Arus Real-Time (A)</h2>
+                <p style="font-size: 0.9em; color: #777;">Data disimulasikan sebagai nilai terbaru.</p>
+                <iframe 
+                    src="current_gauge.html" 
+                    class="iframe-container"
+                    height="350" 
+                    frameborder="0"
+                    scrolling="no"
+                ></iframe>
+            </div>
+
+            <div class="widget">
+                <h2>Display Nilai & Status Sistem</h2>
+                <div class="value-display">
+                    <p class="value">4.85</p>
+                    <p class="unit">Ampere (A)</p>
+                </div>
+                
+                <p class="status-normal">
+                    <span style="font-size: 1.5em;">&#9679;</span> STATUS: NORMAL
+                </p>
+                <p style="font-size: 0.85em; color: #999;">Batas aman maksimum diatur 5.0 A.</p>
+            </div>
+        </div>
+
+        <div class="graph-area">
+            <h2>Grafik Historis Arus (Fluktuasi Data)</h2>
             <iframe 
-                src="current_gauge.html" 
-                class="iframe-container"
-                height="300" 
+                src="current_line_graph.html" 
+                class="iframe-container" 
+                height="600" 
                 frameborder="0"
-                scrolling="no"
+                style="border-radius: 8px;"
             ></iframe>
         </div>
+        
+        <footer style="text-align: center; font-size: 0.9em; color: #777; padding: 20px 0;">
+            <p>&copy; [Tahun Saat Ini] [Nama Kelompok/Anggota]. Sumber Data: Google Colab & Plotly. <a href="current_data.csv" target="_blank">Lihat Data Mentah (.csv)</a></p>
+        </footer>
 
-        <div class="widget">
-            <h2>Display Numerik & Status</h2>
-            <p style="font-size: 3em; font-weight: bold; color: #ff9800;">4.85</p>
-            <p style="font-size: 1.5em; color: #555;">Ampere (A)</p>
-            <p style="color: green; font-weight: bold;">STATUS: NORMAL</p>
-            <p style="font-size: 0.8em; color: #999;">Nilai diambil dari data simulasi terakhir.</p>
-        </div>
     </div>
-
-    <hr>
-    
-    <h2>Grafik Historis Arus</h2>
-    <iframe 
-        src="current_line_graph.html" 
-        class="iframe-container" 
-        height="550" 
-        frameborder="0"
-        style="border: 1px solid #cccccc; border-radius: 8px;"
-    ></iframe>
 
 </body>
 </html>
