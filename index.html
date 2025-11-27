@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard Simulasi Arus DC | IoT Display</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f4f7f6; }
+        .dashboard-header { text-align: center; padding: 10px; background-color: #3f51b5; color: white; border-radius: 8px; margin-bottom: 20px;}
+        .data-widgets { display: flex; justify-content: space-around; margin-bottom: 30px; }
+        .widget { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); text-align: center; width: 30%; }
+        .widget h2 { color: #3f51b5; margin-top: 0; }
+        .value { font-size: 3.5em; font-weight: bold; color: #ff9800; } /* Meter / Display */
+        .unit { font-size: 1.5em; color: #555; }
+    </style>
+</head>
+<body>
+
+    <header class="dashboard-header">
+        <h1>Simulasi Pemantauan Arus DC</h1>
+        <p>Visualisasi IoT menggunakan Google Colab & GitHub Pages</p>
+    </header>
+
+    <h2>Nilai Real-Time (Simulasi Terakhir)</h2>
+    <div class="data-widgets">
+        <div class="widget">
+            <h2>Arus Saat Ini</h2>
+            <div class="value">4.85</div>
+            <div class="unit">Ampere (A)</div>
+            <p style="font-size: 0.8em; color: #999;">Data dari titik simulasi terakhir</p>
+        </div>
+
+        <div class="widget">
+            <h2>Status Beban</h2>
+            <div class="value" style="color: green;">NORMAL</div>
+            <div class="unit">(< 5.0 A)</div>
+            <p style="font-size: 0.8em; color: #999;">Jika > 4.5A, beri warna kuning/merah</p>
+        </div>
+
+        <div class="widget">
+            <h2>Waktu Simulasi</h2>
+            <div class="value" style="font-size: 2.5em;">27/11/2025</div>
+            <div class="unit">17:00:00 WIB</div>
+            <p style="font-size: 0.8em; color: #999;">Waktu data simulasi dibuat</p>
+        </div>
+    </div>
+
+    <h2>Grafik Pemantauan Historis</h2>
+    <iframe 
+        src="current_plotly_graph.html" 
+        width="100%" 
+        height="600" 
+        frameborder="0"
+        style="border: 1px solid #cccccc; border-radius: 8px;"
+    ></iframe>
+
+</body>
+</html>
